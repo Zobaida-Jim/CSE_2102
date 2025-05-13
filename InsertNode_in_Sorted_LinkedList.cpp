@@ -1,0 +1,79 @@
+#include<iostream>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+    Node(int val)
+    {
+        data = val;
+        next = NULL;
+    }
+};
+class List{
+    public:
+    Node* head;
+    Node* tail;
+    List()
+    {
+        head = NULL;
+        tail = NULL;
+    }
+    void push_front(int val) // Ascending Order
+    {
+        Node* newNode = new Node(val);
+        if(head == NULL)
+        {
+            head = newNode;
+        }
+        else
+        {
+            newNode->next = head;
+            head = newNode;
+        }
+    }
+    void Insert(int val)
+    {
+        Node* newNode = new Node(val);
+        Node* temp = head;
+        if(temp->data >= val)
+        {
+            newNode->next = head;
+            head =newNode;
+        }
+        else
+        {
+            while(temp->next->data < val)
+            {
+                temp = temp->next;
+            }
+            newNode->next = temp->next;
+            temp->next = newNode;
+        }
+    }
+    void printList()
+    {
+        Node* temp = head;
+        while(temp != NULL)
+        {
+            cout<<temp->data<<" -> ";
+            temp = temp->next;
+        }
+        cout<<"NULL"<<endl;
+    }
+};
+int main()
+{
+    List LL;
+    LL.push_front(50);
+    LL.push_front(40);
+    LL.push_front(30);
+    LL.push_front(20);
+    LL.push_front(10);
+    LL.printList();
+
+    LL.Insert(33);
+    cout<<"After Insertion"<<endl;
+    LL.printList();
+    return 0;
+}
